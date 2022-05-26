@@ -1,37 +1,37 @@
 package com.mercadolivro.service
 
-import com.mercadolivro.model.CostumerModel
-import com.mercadolivro.repository.CostumerRepository
+import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.repository.CustomerRepository
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.PathVariable
 
 @Service
-class CostumerService(
-    val costumerRepository: CostumerRepository
+class CustomerService(
+    val costumerRepository: CustomerRepository
 ) {
 
 
-    fun getAll(name: String?): List<CostumerModel> {
+    fun getAll(name: String?): List<CustomerModel> {
 
         name?.let {
             return costumerRepository.findByName(name) }
         return costumerRepository.findAll().toList()
     }
 
-    fun createCostumer(costumer: CostumerModel) {
-        costumerRepository.save(costumer)
+    fun createCostumer(customer: CustomerModel) {
+        costumerRepository.save(customer)
     }
 
-    fun getCustomer(id: Int): CostumerModel {
+    fun getById(id: Int): CustomerModel {
         return costumerRepository.findById(id).orElseThrow()
     }
 
-    fun update(costumer: CostumerModel)  {
-        if (costumerRepository.existsById(costumer.id!!)) {
+    fun update(customer: CustomerModel)  {
+        if (costumerRepository.existsById(customer.id!!)) {
             throw Exception()
 
         }
-        costumerRepository.save(costumer)
+        costumerRepository.save(customer)
     }
 
     fun delete(@PathVariable id: Int)  {

@@ -3,7 +3,7 @@ package com.mercadolivro.model
 import javax.persistence.*
 
 @Entity(name = "customer")
-data class CostumerModel (
+data class CustomerModel (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
