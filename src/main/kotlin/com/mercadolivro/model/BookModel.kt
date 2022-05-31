@@ -14,7 +14,7 @@ data class BookModel (
     @Column
     var name: String,
     @Column
-    var price: BigDecimal,
+    var price: BigDecimal?,
     @Column
     @Enumerated(EnumType.STRING)
     var status: BookStatus,

@@ -1,9 +1,9 @@
 package com.mercadolivro.repository
 
+import com.mercadolivro.BookStatus
 import com.mercadolivro.model.BookModel
 import org.springframework.data.repository.CrudRepository
 
 interface BookRepository : CrudRepository<BookModel, Int>{
-
-    fun findByName(name: String): List<BookModel>
+    fun findByStatus(status: BookStatus): List<BookModel>
 }
