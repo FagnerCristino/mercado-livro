@@ -3,6 +3,7 @@ package com.mercadolivro.service
 import com.mercadolivro.BookStatus
 import com.mercadolivro.controller.request.PutBookRequest
 import com.mercadolivro.model.BookModel
+import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.BookRepository
 import org.springframework.stereotype.Service
 
@@ -27,6 +28,15 @@ class BookService(
     fun update(book: BookModel) {
         bookRepository.save(book)
 
+    }
+
+    fun deleteByCustomer(customer: CustomerModel) {
+        val books = bookRepository.findByCustomer(customer)
+        for (book in books) {
+            book.status = BookStatus.DELETADO
+        }
+        bookRepository.saveAll(books)
+     //   bookRepository.findByCustomer(customer)
     }
 
 }
