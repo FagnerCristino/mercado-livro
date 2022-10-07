@@ -3,11 +3,14 @@ Spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:49154/mercadolivro?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:49153/mercadolivro?createDatabaseIfNotExist=true
     username: root
     password: mysqlpw
   jackson:
     default-property-inclusion: non_null
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 
 

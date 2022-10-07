@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable
 
 @Service
 class CustomerService(
-    val costumerRepository: CustomerRepository,
+    val customerRepository: CustomerRepository,
     val bookService: BookService
 ) {
 
@@ -18,30 +18,35 @@ class CustomerService(
     fun getAll(name: String?): List<CustomerModel> {
 
         name?.let {
-            return costumerRepository.findByName(name) }
-        return costumerRepository.findAll().toList()
+            return customerRepository.findByName(name) }
+        return customerRepository.findAll().toList()
     }
 
     fun createCostumer(customer: CustomerModel) {
-        costumerRepository.save(customer)
+        customerRepository.save(customer)
     }
 
     fun findById(id: Int): CustomerModel {
-        return costumerRepository.findById(id).orElseThrow{ NotFoundException(Errors.ML201.message.format(id), Errors.ML201.code) }
+        return customerRepository.findById(id).orElseThrow{ NotFoundException(Errors.ML201.message.format(id), Errors.ML201.code) }
     }
 
     fun update(customer: CustomerModel)  {
-        if (costumerRepository.existsById(customer.id!!)) {
+        if (customerRepository.existsById(customer.id!!)) {
             throw Exception()
 
         }
-        costumerRepository.save(customer)
+        customerRepository.save(customer)
     }
 
     fun delete(@PathVariable id: Int)  {
         val customer = findById(id)
         bookService.deleteByCustomer(customer)
         customer.status = CustomerStatus.INATIVO
-        costumerRepository.save(customer)
+        customerRepository.save(customer)
+    }
+
+    fun emailAvailable(email: String): Boolean {
+        return !customerRepository.existsByEmail(email)
+
     }
 }
